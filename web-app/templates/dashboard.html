@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+
+    <button class="menu-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="sidebar" id="sidebar">
+        <h3 style="text-align: center; color: #11998e; margin-bottom: 20px;">Menu</h3>
+        <a onclick="showSection('home')" id="link-home" class="active-link">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a onclick="showSection('account')" id="link-account">
+            <i class="fas fa-user-cog"></i> Account
+        </a>
+        <a href="/logout" style="color: #d32f2f;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </nav>
+
+    <div class="main-content">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div id="home-section">
+
+            <h1 class="welcome-title">Greenhouses of IUT</h1>
+
+            <div class="cards-container">
+                <a href="/greenhouse/1" class="gh-card">
+                    <div>
+                        <i class="fas fa-leaf" style="font-size: 3rem; display: block; margin-bottom: 10px;"></i>
+                        Greenhouse 1
+                    </div>
+                </a>
+                <a href="/greenhouse/2" class="gh-card">
+                    <div>
+                        <i class="fas fa-seedling" style="font-size: 3rem; display: block; margin-bottom: 10px;"></i>
+                        Greenhouse 2
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="account-section">
+            <h2>Account Settings</h2>
+            <div class="info-box">
+                <p><strong>Current Username:</strong> {{ admin.username }}</p>
+                <p><strong>Current Password:</strong> {{ admin.password }}</p>
+            </div>
+            <hr style="margin: 20px 0; opacity: 0.5;">
+            <form action="/update_account" method="POST">
+                <h4 style="margin-bottom: 15px;">Update Credentials</h4>
+                <div class="form-group">
+                    <input type="text" name="new_username" placeholder="New Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="new_password" placeholder="New Password" required>
+                </div>
+                <button type="submit" class="login-btn">Update</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.querySelector('.menu-btn').classList.toggle('open');
+        }
+
+        function showSection(sectionId) {
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('account-section').style.display = 'none';
+            document.getElementById('link-home').classList.remove('active-link');
+            document.getElementById('link-account').classList.remove('active-link');
+
+            if (sectionId === 'home') {
+                document.getElementById('home-section').style.display = 'flex';
+                document.getElementById('link-home').classList.add('active-link');
+            } else {
+                document.getElementById('account-section').style.display = 'block';
+                document.getElementById('link-account').classList.add('active-link');
+            }
+
+            document.getElementById('sidebar').classList.remove('active');
+            document.querySelector('.menu-btn').classList.remove('open');
+        }
+
+        window.onload = function () {
+            const alerts = document.querySelectorAll('.alert');
+            if (alerts.length > 0) {
+                setTimeout(() => {
+                    alerts.forEach(alert => {
+                        alert.style.transition = "opacity 0.5s";
+                        alert.style.opacity = "0";
+                        setTimeout(() => alert.remove(), 500);
+                    });
+                }, 3000);
+            }
+        };
+    </script>
+
+</body>
+
+</html>
