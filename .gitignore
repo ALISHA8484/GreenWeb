@@ -1,0 +1,38 @@
+**/web-pp/__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Keil MDK-ARM Specific ---
+**/Greenhouse/MDK-ARM/Objects/
+**/Greenhouse/MDK-ARM/Listings/
+**/Greenhouse/MDK-ARM/*.uvguix.*
+**/Greenhouse/MDK-ARM/*.bak
+**/Greenhouse/MDK-ARM/*.dep
+**/Greenhouse/MDK-ARM/*.htm
+**/Greenhouse/MDK-ARM/*.map
+**/Greenhouse/MDK-ARM/*.lnp
+**/Greenhouse/New Folder/
+**/Greenhouse/MDK-ARM/*.build_log.htm
+
+# --- Compiled Output ---
+*.o
+*.d
+*.crf
+*.elf
+*.hex
+*.bin
+*.axf
+*.sbi
+
+# --- STM32CubeIDE / TrueSTUDIO (اگر در آینده استفاده کردید) ---
+Debug/
+Release/
+
+# --- User Specific & Temporary Files ---
+*.scvd
+*.uvoptx
+.DS_Store
+Thumbs.db
+
+# --- Backup Files ---
+Backup/
