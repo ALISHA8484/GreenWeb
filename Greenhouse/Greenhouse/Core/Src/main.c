@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,6 +70,7 @@ uint32_t pMillis, cMillis;
 float tCelsius = 0;
 float tFahrenheit = 0;
 float RH = 0;
+char msg[50];
 
 void microDelay (uint16_t delay)
 {
@@ -227,7 +229,7 @@ int main(void)
 					HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
 				}
 				
-				HAL_Delay(2000);
+				HAL_Delay(1000);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,0);
@@ -251,7 +253,7 @@ int main(void)
 					HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
 				}
 				
-				HAL_Delay(2000);
+				HAL_Delay(1000);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,0);
@@ -279,7 +281,7 @@ int main(void)
 					HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
 				}
 				
-				HAL_Delay(2000);
+				HAL_Delay(1000);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,0);
@@ -306,7 +308,12 @@ int main(void)
       }
     /* USER CODE BEGIN 3 */
 		}
-		HAL_Delay(2000);
+		int T = (int)tCelsius;
+		int R = (int)RH;
+		sprintf(msg, "{\"t\": %d, \"h\": %d}\n",T ,R );
+    HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 100);
+		HAL_Delay(1000);
+		
 	}
   /* USER CODE END 3 */
 }

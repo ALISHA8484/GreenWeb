@@ -1,0 +1,9 @@
+#copy code from laptop to raspberry
+scp -r "E:\Robotic\GreenWeb\web-app" pi@raspberrypi.local:~/Desktop/GreenWeb
+
+
+
+ssh pi@raspberrypi.local
+password = pedram*121*
+
+python ~/Desktop/GreenWeb/web-app/app.py

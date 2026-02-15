@@ -9,8 +9,8 @@ admin_config = {
     'password': 'IUTgreenhouses'
 }
 
-gh1 = Greenhouse(name="Greenhouse 1", port="/dev/ttyUSB0") 
-gh2 = Greenhouse(name="Greenhouse 2", port="/dev/ttyUSB1")
+gh1 = Greenhouse(name="Greenhouse 1", port="/dev/serial0") 
+gh2 = Greenhouse(name="Greenhouse 2", port="/dev/ttyAMA1")
 
 greenhouses = {
     '1': gh1,
@@ -70,8 +70,8 @@ def greenhouse_detail(id):
     target_gh = greenhouses.get(id)
     
     if target_gh:
-        # sensor_data = target_gh.read_sensor_data()
-        sensor_data = {'temp' : 27, 'hum' : 50, 'status' : 'Online'}
+        sensor_data = target_gh.read_loop()
+        #sensor_data = {'temp' : 27, 'hum' : 50, 'status' : 'Online'}
         
         return render_template('greenhouse_detail.html', gh=target_gh, data=sensor_data)
     else:
@@ -83,4 +83,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
