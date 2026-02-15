@@ -8,9 +8,8 @@ class Greenhouse:
         self.port = port
         self.latest_data = {'temp': 0, 'hum': 0, 'status': 'Initializing'}
         try:
-            #self.ser = serial.Serial(self.port, 115200, timeout=1)
-            self.thread = threading.Thread(target=self._read_loop, daemon=True)
-            self.thread.start()
+            self.ser = serial.Serial(self.port, 115200, timeout=1)
+
         except:
             self.latest_data['status'] = 'Offline'
 
@@ -22,7 +21,7 @@ class Greenhouse:
                     data = json.loads(line)
                     self.latest_data = {
                         'temp': data.get('t'),
-                        'hum': data.get('h'),
+                        'hum': data.get('h') + 1,
                         'status': 'Online'
                     }
                 return self.latest_data

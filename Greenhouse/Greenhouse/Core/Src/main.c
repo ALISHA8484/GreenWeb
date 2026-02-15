@@ -229,7 +229,7 @@ int main(void)
 					HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
 				}
 				
-				HAL_Delay(1000);
+				HAL_Delay(250);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,0);
@@ -253,7 +253,7 @@ int main(void)
 					HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
 				}
 				
-				HAL_Delay(1000);
+				HAL_Delay(250);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,0);
@@ -281,7 +281,7 @@ int main(void)
 					HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
 				}
 				
-				HAL_Delay(1000);
+				HAL_Delay(250);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
 				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,0);
